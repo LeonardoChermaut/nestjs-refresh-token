@@ -12,10 +12,10 @@ export class AuthController {
     return this.authService.signupLocal(dto);
   }
 
-  // @Post('/local/signin')
-  // signinLocal(@Body() dto: AuthDto) {
-  //   return this.authService.signinLocal();
-  // }
+  @Post('/local/signin')
+  signinLocal(@Body() dto: AuthDto): Promise<Tokens> {
+    return this.authService.signinLocal(dto);
+  }
 
   // @Post('/logout')
   // logout(@Body() dto: AuthDto) {
