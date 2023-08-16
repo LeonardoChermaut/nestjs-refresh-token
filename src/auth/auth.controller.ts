@@ -3,11 +3,11 @@ import { AuthService } from './auth.service';
 import { AuthDto } from './dto';
 import { Tokens } from './types';
 
-@Controller('auth')
+@Controller('api/v1/auth/')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('/local/signup')
+  @Post('local/signup')
   signupLocal(@Body() dto: AuthDto): Promise<Tokens> {
     return this.authService.signupLocal(dto);
   }

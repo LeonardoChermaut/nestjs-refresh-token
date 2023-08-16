@@ -15,6 +15,27 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async signupLocal(dto: AuthDto): Promise<Tokens> {
+    const hash = await this.hashData(dto.password);
+    const user = await this.prismaService.user.create({
+      data: {
+        name: dto.name,
+        email: dto.email,
+        hash,
+      },
+    });
+    const tokens = await this.getTokens(user.id, user.email);
+    await this.updateRefreshToken(user.id, tokens.refresh_token);
+
+    return tokens;
+  }
+
+  // signinLocal() {}
+
+  // logout() {}
+
+  // refreshToken() {}
+
   hashData(data: string) {
     return bcrypt.hash(data, AuthService.SALT_ROUNDS);
   }
@@ -42,22 +63,11 @@ export class AuthService {
     };
   }
 
-  async signupLocal(dto: AuthDto): Promise<Tokens> {
-    const hash = await this.hashData(dto.password);
-    const newUser = await this.prismaService.user.create({
-      data: {
-        name: dto.name,
-        email: dto.email,
-        hash,
-      },
+  async updateRefreshToken(userId: number, refreshToken: string) {
+    const hash = await this.hashData(refreshToken);
+    return await this.prismaService.user.update({
+      where: { id: userId },
+      data: { hashedRefreshToken: hash },
     });
-    const tokens = await this.getTokens(newUser.id, newUser.email);
-    return tokens;
   }
-
-  // signinLocal() {}
-
-  // logout() {}
-
-  // refreshToken() {}
 }
