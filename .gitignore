@@ -15,6 +15,9 @@ yarn-error.log*
 lerna-debug.log*
 yarn.lock
 
+# Docker
+docker-compose.yml
+
 # OS
 .DS_Store
 
@@ -26,7 +29,6 @@ yarn.lock
 /.idea
 .project
 .classpath
-.c9/
 *.launch
 .settings/
 *.sublime-workspace

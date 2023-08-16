@@ -16,7 +16,7 @@ $ npm install
 
 ```bash
 # development
-$ nest start:dev
+$ nest start --watch
 ```
 
 ## Test
