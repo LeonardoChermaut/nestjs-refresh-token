@@ -1,10 +1,10 @@
 version: '3'
 services:
   db:
-  image: postgres:12
-  ports:
-    - '5432:5432'
-  environment:
-    POSTGRES_USER: developer
-    POSTGRES_PASSWORD: '_root_'
-    POSTGRES_DB: nestjs-authentication
+    image: postgres:15
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: _root_
+      POSTGRES_DB: nestjs-authentication

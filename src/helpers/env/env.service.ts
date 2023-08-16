@@ -6,6 +6,10 @@ import { EnvConfiguration } from '@src/helpers/env';
 export class EnvService implements IEnv {
   constructor(private envConfig: EnvConfiguration) {}
 
+  getDataBaseUrl(): string {
+    return this.envConfig.getValue('DATABASE_URL');
+  }
+
   getJwtSecret(): string {
     return this.envConfig.getValue('JWT_SECRET');
   }
